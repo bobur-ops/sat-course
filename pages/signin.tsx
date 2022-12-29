@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Input, Spinner, Text } from '@chakra-ui/react';
 
-import loginSvg from '../../public/login.svg';
+import loginSvg from '../public/login.svg';
 
 import { BsGoogle } from 'react-icons/bs';
 import Image from 'next/image';
