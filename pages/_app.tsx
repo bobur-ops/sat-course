@@ -1,11 +1,11 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Box, ChakraProvider } from '@chakra-ui/react';
-import { initFirebase } from '../utils/firebaseConfig';
+import { initFirebase } from '../utils/initFirebase';
 
 export default function App({ Component, pageProps }: AppProps) {
 	initFirebase();
-	return (
+  return (
 		<ChakraProvider>
 			<Box
 				background={

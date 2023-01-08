@@ -20,6 +20,7 @@
 		"dashify": "^2.0.0",
 		"eslint": "8.29.0",
 		"eslint-config-next": "13.0.6",
+		"firebase": "^9.15.0",
 		"firebase-admin": "^11.4.0",
 		"framer-motion": "^8.0.2",
 		"next": "13.0.6",
@@ -32,6 +33,6 @@
 		"typescript": "4.9.4"
 	},
 	"devDependencies": {
-		"@types/firebase": "^3.2.1"
+		"prettier": "^2.8.2"
 	}
 }

@@ -1,14 +1,33 @@
 import { Box, Spinner } from '@chakra-ui/react';
-import { getAuth } from 'firebase/auth';
+import { getAuth, User } from 'firebase/auth';
+import { doc, DocumentData, getDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Purchase from '../containers/Purchase';
+import { IUser } from '../types';
+import { db } from '../utils/initFirebase';
 
 const Page = () => {
 	const auth = getAuth();
-	const [user, loading] = useAuthState(auth);
+	const [authUser, loading] = useAuthState(auth);
+	const [user, setUser] = useState<IUser | null>(null);
+
 	const router = useRouter();
+
+	const getUser = async () => {
+		if (!loading) {
+			const phone: string = authUser?.phoneNumber as string;
+			const docRef = doc(db, 'Users', phone);
+
+			const docSnap = await getDoc(docRef);
+
+			setUser(docSnap.data() as IUser);
+		}
+	};
+	useEffect(() => {
+		getUser();
+	}, [loading]);
 
 	if (loading)
 		return (
@@ -22,7 +41,7 @@ const Page = () => {
 			</Box>
 		);
 
-	if (!user) router.push('/signup');
+	if (!authUser) router.push('/signup');
 
 	return <Purchase user={user} />;
 };
